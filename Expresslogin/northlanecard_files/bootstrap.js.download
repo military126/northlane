@@ -1,0 +1,118 @@
+/* comment here*/
+
+(function(app) {
+	require.config({
+		shim : {
+			underscore : {
+				exports : '_'
+			},
+			Backbone : {
+				deps : ["underscore", "jquery"],
+				exports : "Backbone"
+			},
+			cpCT : {
+				deps : ['underscore', 'Backbone'],
+				exports : 'CT'
+			},
+			domReady : {
+				exports : 'domReady'
+			},
+			/*cpiScroll : {
+				exports : 'iScroll'
+			},
+			cpJson2XML : {
+				exports : 'cpJson2XML'
+			},
+			cpJqueryAuto : {
+				deps : ['jquery'],
+				exports : 'cpJqueryAuto'
+			},
+			jqueryTouch : {
+				deps : ['jquery','cpJqueryAuto'],
+				exports : 'jqueryTouch'
+			},*/
+			BackboneTouch : {
+				deps : ['Backbone','jquery'],
+				exports : 'BackboneTouch'
+			},
+			CryptoJS:{
+				exports:'CryptoJS'
+			},
+			Base64:{
+				exports:'Base64'
+			},
+			AC_OETags:{
+				exports:'AC_OETags'
+			},
+			fp_AA:{
+				exports:'fp_AA'
+			},
+			security:{
+				exports:'security'
+			}
+			
+			
+			
+
+		},
+		
+		paths : {
+					cpApp : cpEnv_Web.debug?cpEnv_Web.contentBox+'/app':cpEnv_Web.contentBox+'/libs/cpLibs',
+					underscore : cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/backbone/underscore':cpEnv_Web.contentBox+'/libs/cpLibs',
+					underscore_str :cpEnv_Web.debug?cpEnv_Web.contentBox+ '/libs/backbone/underscore.string':cpEnv_Web.contentBox+'/libs/cpLibs',
+					Backbone : cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/backbone/backbone':cpEnv_Web.contentBox+'/libs/cpLibs',
+					cpCT : cpEnv_Web.debug?cpEnv_Web.contentBox+'/common/js/citi.backbone':cpEnv_Web.contentBox+'/libs/cpLibs',
+					/*"cp.jquery.xmlparser" : cpEnv_Web.contentBox+'/libs/jqueryplugins/jquery.xml2json',*/
+					"domReady" : cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/requirejquery/domready':cpEnv_Web.contentBox+'/libs/cpLibs',
+					cpUtils : cpEnv_Web.debug?cpEnv_Web.contentBox+'/common/js/utils':cpEnv_Web.contentBox+'/libs/cpLibs',
+					cpRouter : cpEnv_Web.contentBox+'/' + cpEnv_Web.module + '/modules/router',
+					text : cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/requirejquery/text':cpEnv_Web.contentBox+'/libs/cpLibs',
+					/*cpiScroll : cpEnv_Web.contentBox+'/libs/scroll/iscroll',
+					cpJson2XML : cpEnv_Web.contentBox+'/libs/json2xml',
+					cpJqueryAuto : cpEnv_Web.contentBox+'/libs/jqueryplugins/jquery-ui',
+					jqueryTouch:cpEnv_Web.contentBox+'/libs/jqueryplugins/jquery.ui.touch-punch.min',*/
+					BackboneTouch:cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/backbone/backbone.touch':cpEnv_Web.contentBox+'/libs/cpLibs',
+					CryptoJS : cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/security/aes':cpEnv_Web.contentBox+'/libs/cpLibs',
+					Base64: cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/security/base64':cpEnv_Web.contentBox+'/libs/cpLibs',
+					AC_OETags : cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/security/AC_OETags':cpEnv_Web.contentBox+'/libs/cpLibs',
+					fp_AA:	cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/security/fp_AA':cpEnv_Web.contentBox+'/libs/cpLibs',
+					security:cpEnv_Web.debug?cpEnv_Web.contentBox+'/libs/security/security':cpEnv_Web.contentBox+'/libs/cpLibs'	
+
+		
+		},
+		waitSeconds : 60,
+		baseUrl : cpEnv_Web.contextRoot,
+
+	});
+
+	require.onError = function(err) {
+		$("#cp-container .loaderOverlay").css("display", "none");
+	};
+
+	/*var isTouch = "ontouchstart" in window ? "touchend" : "click";*/
+	// prepare required libs
+	var required = ["underscore", "Backbone", "cpUtils","cpApp", "domReady", "cpCT", "cpRouter",/* 'cp.jquery.xmlparser', "cpiScroll", "cpJqueryAuto", 'cpJson2XML','jqueryTouch',*/ 'BackboneTouch','CryptoJS','Base64','AC_OETags','fp_AA','security'];
+	
+	var MOBILE_BOOTSTRAP = function(_, Backbone, utils, App, domReady, CT, Router) {
+		domReady(function() {
+			BOOTSTRAP(App, Router);
+		});
+	};
+
+	var BOOTSTRAP = function(App, Router) {
+		// init Router
+		App[cpEnv_Web.module].router = new Router({
+			app : App
+		});
+		//Backbone.history.start();
+		App[cpEnv_Web.module].router.index('');
+
+		/* temporary code for debug */
+		if (cpEnv_Web.debug) {
+			//window.App = App;
+		}
+
+	};
+	require(required, MOBILE_BOOTSTRAP);
+
+})(window);

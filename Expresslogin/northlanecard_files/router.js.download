@@ -1,0 +1,363 @@
+define(
+		[ 'cpApp' ],
+		function(App) {
+			require
+					.config({
+						paths : {
+									/*Load All common here*/
+									'cp.common.cpConstants': cpEnv_Web.debug?cpEnv_Web.contentBox+'/common/js/cpConstants':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpSSOLogin':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Login/cpSSOLogin':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpBaseView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/cpBaseView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.common.alertWarningMessage':cpEnv_Web.debug?cpEnv_Web.contentBox+'/common/js/cpAlertWarningMessage':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.common.exceptionhandlingservice':cpEnv_Web.debug?cpEnv_Web.contentBox+'/common/js/cpExceptionHandlingService':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.common.networkingservice' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/common/js/cpNetworkingService':cpEnv_Web.contentBox+'/cp/modules/cpMain',	
+									'cp.common.cpGeoLocationServices':cpEnv_Web.debug?cpEnv_Web.contentBox+'/common/js/cpGeoLocationServices':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									/*Load All models here*/
+									'cp.models.cpLanguageMapping':cpEnv_Web.debug?cpEnv_Web.contentBox+'/common/js/cpLanguageMapping':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpSessionController':cpEnv_Web.debug?cpEnv_Web.contentBox+'/common/js/cpSessionController':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpPaymentChoice':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentChoiceModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpUserInfo':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Login/cpUserInfoModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpChoiceUserInfo':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpChoiceUserInfoModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpSettings':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Login/cpSettings':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpPaymentClaim':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/RedeemCode/cpPaymentClaimModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpAccountTransaction':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccountDetails/cpAccountTransactionModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpFAQDetails':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/FAQs/cpFAQModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpDisclosureFeesDetails':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/DisclosuresAndFees/cpDisclosuresAndFeesModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpContactUsDetails':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ContactUs/cpContactUsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpImageCaptcha':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ForgotUsername/cpImageCaptchaModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpImageCaptcha':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ForgotPassword/cpImageCaptchaModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpAtmLocatorDetails':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AtmLocator/cpAtmLocatorModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpRegistrationConfiguration':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpRegistrationConfiguration':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpRegistrationInfo':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpRegistrationInfoModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpMFAChallengeQuestion':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/MFA/cpMFAChallengeQuestionModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpCardDetails':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpCardDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',									
+									'cp.models.cpAddFunds':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ShopNow/cpAddFundsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpPaymentChoiceLandingModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentChoiceLandingModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpPaymentExpressLandingModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentExpressLandingModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpPaymentExpressInvalidLogoutModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentExpressInvalidLogoutModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									/*************Load dependency collection and models  here*************************************/
+									'cp.collections.cpMFAChallengeCollect':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/MFA/cpMFAchallengeCollection':cpEnv_Web.contentBox+'/cp/modules/cpMain',		
+									'cp.collections.cpAccountTransactions':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccountDetails/cpAccountTransactionsCollection':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpAccountDetails':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccountDetails/cpAccountDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpOfferDetails':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ShopNow/cpOfferDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.collections.cpVendorCollection':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ShopNow/cpVendorCollection':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpShop':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ShopNow/cpShopModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									/*********************************************************************************/
+									'cp.models.cpMFAAuthentication':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/MFA/cpMFAAuthenticationModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpAlertSetUp':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpAlertSetUpModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpretrievePINsettings':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PINReset/cpPinResetSettingsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',								
+									'cp.models.cpBankDetails':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpBankDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpWithdrawalDetails':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpWithdrawalDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpPaymentChoiceBankDetailsModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentChoiceBankDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									/*JIRA 786 collection*/		
+									'cp.collections.cpGlobalTransferHistory':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalTransferHistoryCollection':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									/*JIRA 786 model*/
+									'cp.models.cpGlobalTransferHistoryModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalTransferHistoryModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalTransferModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalTransferModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalRecurringTransfersModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalRecurringTransfersModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalRetrieveBankDetailsModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalBankDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpCurrentFxRateCountryDetailsModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpCurrentFxRateCountryDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpCurrentFxRateCurrencyDetailsModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpCurrentFxRateCurrencyDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpCurrentFxRateModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpCurrentFxRateModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalPaymentMethodsModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalPaymentMethodsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalOTTUserBanksDetailsModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalOTTUserBanksDetailsModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalOTTGetFxRateModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalOTTGetFxRateModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalOTTConfirmModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalOTTConfirmModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalOTTSuccessModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalOTTSuccessModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalOTTCancelModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalOTTCancelModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalSelectedBankInfoModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalSelectedBankInfoModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.models.cpGlobalEditRetrieveModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalEditRetrieveModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',	
+									'cp.models.cpCardAuthenticationModel':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/CardActivation/cpCardAuthenticationModel':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									/*Load All Collections here*/
+									'cp.collections.cpDisclosuresAndFees':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/DisclosuresAndFees/cpDisclosuresAndFeesCollection':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.collections.cpFAQCollection':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/FAQs/cpFAQCollection':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.collections.cpPaymentClaim':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/RedeemCode/cpPaymentClaimCollection':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									/*Load All Views Here*/
+									'cp.views.cpLoginView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Login/cpLoginView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpMenuLoader':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Menu/cpMenuLoader':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpLoginMFAView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Login/cpLoginMFAView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentHubBaseView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentHubBaseView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentHubLoaderView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentHubLoaderView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpChoicesLandingView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpChoicesLandingView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentExpressLandingView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentExpressLandingView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentExpressInvalidLogoutView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentExpressInvalidLogoutView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpChoicesFirstTimeLoginView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpChoicesFirstTimeLoginView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpChoicesUserCreationView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpChoicesUserCreationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentDelivaryChoiceView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentDelivaryChoiceView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentSelectedDelivaryChoiceView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpPaymentSelectedDelivaryChoiceView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpChoicesReturningUserLoginView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpChoicesReturningUserLoginView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpChoicesRequestCardView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpChoicesRequestCardView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpChoicesRequestCheckView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpChoicesRequestCheckView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									
+									'cp.views.cpChoicesConfirmationView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpChoicesConfirmationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpRegistrationBaseView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpRegistrationBaseView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentChoiceRegistrationBaseView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpPaymentChoiceRegistrationBaseView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpRegistrationCardValidationView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpRegistrationCardValidationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpRegistrationNewUserView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpRegistrationNewUserView':cpEnv_Web.contentBox+'/cp/modules/cpMain',		
+									'cp.views.cpAlertSetUpView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpAlertSetUpView':cpEnv_Web.contentBox+'/cp/modules/cpMain',	
+									'cp.views.cpProfileConfirmationView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpProfileConfirmationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPinResetView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PINReset/cpPinResetView':cpEnv_Web.contentBox+'/cp/modules/cpMain',											
+									'cp.views.cpNewPinView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PINReset/cpNewPinView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpRegistrationTipsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Registration/cpRegistrationTipsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',	
+									'cp.views.cpMFAChallengeCollectView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/MFA/cpMFAChallengeCollectView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpMFAChallengeQuestionView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/MFA/cpMFAChallengeQuestionView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpMFAOTPView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/MFA/cpMFAOTPView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpMFAAccessCodeView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/MFA/cpMFAAccessCodeView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpExpressLoginView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Login/cpExpressLoginView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPostalcodeView' : cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Login/cpPostalcodeView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpForgotUsernameView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ForgotUsername/cpForgotUsernameView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpForgotPasswordView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ForgotPassword/cpForgotPasswordView':cpEnv_Web.contentBox+'/cp/modules/cpMain',											
+									'cp.views.cpPaymentClaimView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/RedeemCode/cpPaymentClaimView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentClaimAuthenticationView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/RedeemCode/cpPaymentClaimAuthenticationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentClaimLoginView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/RedeemCode/cpPaymentClaimLoginView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentActivationView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/RedeemCode/cpPaymentActivationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPaymentConfirmationView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/RedeemCode/cpPaymentConfirmationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpMenuView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Menu/cpMenuView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpDashboardView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Dashboard/cpDashboardView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpAccountDetailsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccountDetails/cpAccountDetailsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpEditProfileView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/EditProfile/cpEditProfileView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpShopView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ShopNow/cpShopView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpMobileWalletSetupView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ShopNow/cpMobileWalletSetupView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpAddFundsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ShopNow/cpAddFundsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpAddFundsConfirmationView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ShopNow/cpAddFundsConfirmationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpFAQView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/FAQs/cpFAQView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpContactUsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/ContactUs/cpContactUsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpDisclosuresAndFeesView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/DisclosuresAndFees/cpDisclosuresAndFeesView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpTermsAndConditionsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/TermsAndConditions/cpTermsAndConditionsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPrivacyView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/Privacy/cpPrivacyView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpBankTransferBaseView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpBankTransferBaseView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpCurrentWithdrawalSettingsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpCurrentWithdrawalSettingsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpWithdrawalTCView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpWithdrawalTCView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpModalView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpModalView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpScheduleWithdrawalView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpScheduleWithdrawalView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpRecurringWithdrawalView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpRecurringWithdrawalView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpOneTimeWithdrawalView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpOneTimeWithdrawalView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpEditBankDetailsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpEditBankDetailsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpConfirmWithdrawalDetailsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpConfirmWithdrawalDetailsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpRequestCheckView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpRequestCheckView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpRequestPlasticView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/AccessFunds/cpRequestPlasticView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpPasswordValidationView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/EditProfile/cpPasswordValidationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpChoicesTransfertoBankView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/PaymentHub/cpChoicesTransfertoBankView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									/*JIRA 786 view*/
+									'cp.views.cpGlobalDepositsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalDepositsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',		
+									'cp.views.cpGlobalBankDetailsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalBankDetailsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpGlobalRecurringTransfersView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalRecurringTransfersView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpGlobalAddBankView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalAddBankView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpCurrentFxRateView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpCurrentFxRateView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpGlobalOTTUserBanksDetailsView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalOTTUserBanksDetailsView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpGlobalOTTConfirmView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalOTTConfirmView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpGlobalOTTSuccessView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalOTTSuccessView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpGlobalOTTCancelView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalOTTCancelView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpGlobalEditView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalEditView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpGlobalSelectedBankInfoView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalSelectedBankInfoView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpGlobalBankMFAView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/GlobalDeposits/cpGlobalBankMFAView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpCardActivationLandingPageView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/CardActivation/cpCardActivationLandingPageView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpCardAuthenticationView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/CardActivation/cpCardAuthenticationView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpCardActivationNewPinView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/CardActivation/cpCardActivationNewPinView':cpEnv_Web.contentBox+'/cp/modules/cpMain',
+									'cp.views.cpCardActivationSuccessView':cpEnv_Web.debug?cpEnv_Web.contentBox+'/cp/modules/CardActivation/cpCardActivationSuccessView':cpEnv_Web.contentBox+'/cp/modules/cpMain'
+									
+						}
+					});
+
+			var sandbox = App[cpEnv_Web.module];
+			var Router = Backbone.Router.extend({
+				routes : {
+					'' : 'index'
+				},
+
+				initialize : function() {
+
+				},
+
+				initData : function() {
+					
+				},
+
+				index : function(viewele) {
+					var requiredFiles = [
+					                /*Load All common here*/
+					                'cp.common.cpConstants',
+					                'cp.models.cpSSOLogin',
+					                'cp.views.cpBaseView',
+					                'cp.common.alertWarningMessage',
+					                'cp.common.exceptionhandlingservice',
+					                'cp.common.networkingservice',
+					                'cp.common.cpGeoLocationServices',
+					                /*Load All models here*/
+									'cp.models.cpLanguageMapping',
+									'cp.models.cpSessionController',
+									'cp.models.cpPaymentChoice',
+									'cp.models.cpUserInfo',
+									'cp.models.cpChoiceUserInfo',
+									
+									'cp.models.cpSettings',
+									'cp.models.cpPaymentClaim',
+									'cp.models.cpAccountTransaction',
+									'cp.models.cpFAQDetails',
+									'cp.models.cpDisclosureFeesDetails',
+									'cp.models.cpContactUsDetails',
+									'cp.models.cpImageCaptcha',
+									'cp.models.cpAtmLocatorDetails',
+									'cp.models.cpRegistrationConfiguration',
+									'cp.models.cpRegistrationInfo',
+									'cp.models.cpMFAChallengeQuestion',
+									'cp.models.cpCardDetails',
+									'cp.models.cpAddFunds',
+									'cp.models.cpPaymentChoiceLandingModel',
+									'cp.models.cpPaymentExpressLandingModel',
+									'cp.models.cpPaymentExpressInvalidLogoutModel',
+									'cp.collections.cpMFAChallengeCollect',
+									'cp.collections.cpAccountTransactions',
+									'cp.models.cpAccountDetails',
+									'cp.models.cpOfferDetails',
+									'cp.collections.cpVendorCollection',
+									'cp.models.cpShop',
+									'cp.models.cpMFAAuthentication',
+									'cp.models.cpAlertSetUp',
+									'cp.models.cpretrievePINsettings',
+									'cp.models.cpBankDetails',
+									'cp.models.cpWithdrawalDetails',
+									'cp.models.cpPaymentChoiceBankDetailsModel',
+									'cp.collections.cpGlobalTransferHistory',
+									'cp.models.cpGlobalTransferHistoryModel',
+									'cp.models.cpGlobalTransferModel',
+									'cp.models.cpGlobalRecurringTransfersModel',
+									'cp.models.cpGlobalRetrieveBankDetailsModel',
+									'cp.models.cpCurrentFxRateCountryDetailsModel',
+									'cp.models.cpCurrentFxRateCurrencyDetailsModel',
+									'cp.models.cpCurrentFxRateModel',
+									'cp.models.cpGlobalPaymentMethodsModel',
+									'cp.models.cpGlobalOTTUserBanksDetailsModel',
+									'cp.models.cpGlobalOTTGetFxRateModel',
+									'cp.models.cpGlobalOTTConfirmModel',
+									'cp.models.cpGlobalOTTSuccessModel',
+									'cp.models.cpGlobalOTTCancelModel',
+									'cp.models.cpGlobalSelectedBankInfoModel',
+									'cp.models.cpGlobalEditRetrieveModel',
+									'cp.models.cpCardAuthenticationModel',
+									
+									/*Load All Collections here*/
+									'cp.collections.cpDisclosuresAndFees',
+									'cp.collections.cpFAQCollection',
+									'cp.collections.cpPaymentClaim',
+									/*Load All Views Here*/
+					                'cp.views.cpLoginView',
+					                'cp.views.cpMenuLoader',
+					                'cp.views.cpLoginMFAView',
+					                'cp.views.cpPaymentHubBaseView',
+					                'cp.views.cpPaymentHubLoaderView',
+					            	'cp.views.cpChoicesLandingView',
+					            	'cp.views.cpPaymentExpressLandingView',
+					            	'cp.views.cpPaymentExpressInvalidLogoutView',
+									'cp.views.cpChoicesFirstTimeLoginView',
+									'cp.views.cpChoicesUserCreationView',
+									'cp.views.cpPaymentDelivaryChoiceView',
+									'cp.views.cpPaymentSelectedDelivaryChoiceView',
+									'cp.views.cpChoicesReturningUserLoginView',
+									'cp.views.cpChoicesRequestCardView',
+									'cp.views.cpChoicesRequestCheckView',									
+									'cp.views.cpChoicesConfirmationView',
+					                'cp.views.cpRegistrationBaseView',
+					                'cp.views.cpPaymentChoiceRegistrationBaseView',
+					                'cp.views.cpRegistrationCardValidationView',
+					                'cp.views.cpRegistrationNewUserView',
+					                'cp.views.cpAlertSetUpView',
+					                'cp.views.cpProfileConfirmationView',
+					                'cp.views.cpPinResetView',
+					                'cp.views.cpNewPinView',
+					                'cp.views.cpRegistrationTipsView',
+					                'cp.views.cpMFAChallengeCollectView',
+					                'cp.views.cpMFAChallengeQuestionView',
+					                'cp.views.cpMFAOTPView',
+					                'cp.views.cpMFAAccessCodeView',
+					                'cp.views.cpExpressLoginView',
+					                'cp.views.cpPostalcodeView',
+					                'cp.views.cpForgotUsernameView',
+					                'cp.views.cpForgotPasswordView',
+					                'cp.views.cpPaymentClaimView',
+									'cp.views.cpPaymentClaimAuthenticationView',
+									'cp.views.cpPaymentClaimLoginView',
+									'cp.views.cpPaymentActivationView',
+									'cp.views.cpPaymentConfirmationView',
+					                'cp.views.cpMenuView',
+									'cp.views.cpDashboardView',
+									'cp.views.cpAccountDetailsView',
+									'cp.views.cpEditProfileView',
+									'cp.views.cpShopView',
+									'cp.views.cpMobileWalletSetupView',
+									'cp.views.cpAddFundsView',
+									'cp.views.cpAddFundsConfirmationView',
+									'cp.views.cpFAQView',
+									'cp.views.cpContactUsView',
+									'cp.views.cpDisclosuresAndFeesView',
+									'cp.views.cpTermsAndConditionsView',
+									'cp.views.cpPrivacyView',
+									'cp.views.cpBankTransferBaseView',
+									'cp.views.cpCurrentWithdrawalSettingsView',
+									'cp.views.cpWithdrawalTCView',
+									'cp.views.cpModalView',
+									'cp.views.cpScheduleWithdrawalView',
+									'cp.views.cpRecurringWithdrawalView',
+									'cp.views.cpOneTimeWithdrawalView',
+									'cp.views.cpEditBankDetailsView',
+									'cp.views.cpConfirmWithdrawalDetailsView',
+									'cp.views.cpRequestCheckView',
+									'cp.views.cpRequestPlasticView',
+									'cp.views.cpPasswordValidationView',
+									'cp.views.cpChoicesTransfertoBankView',
+									'cp.views.cpGlobalDepositsView',
+									'cp.views.cpGlobalBankDetailsView',
+									'cp.views.cpGlobalRecurringTransfersView',
+									'cp.views.cpGlobalAddBankView',
+									'cp.views.cpCurrentFxRateView',
+									'cp.views.cpGlobalOTTUserBanksDetailsView',
+									'cp.views.cpGlobalOTTConfirmView',
+									'cp.views.cpGlobalOTTSuccessView',
+									'cp.views.cpGlobalOTTCancelView',
+									'cp.views.cpGlobalEditView',
+									'cp.views.cpGlobalSelectedBankInfoView',
+									'cp.views.cpGlobalBankMFAView',
+									'cp.views.cpCardActivationLandingPageView',
+									'cp.views.cpCardAuthenticationView',
+									'cp.views.cpCardActivationNewPinView',
+									'cp.views.cpCardActivationSuccessView'
+							 ];		
+					/***Load All the template files from the array**************/
+					
+					var templateFiles = [];
+					if(cpEnv_Web.contentBox !== '.'){
+						/****Deployment into App Server**************************/
+						templateFiles = [					                 
+					                   'text!../templates/cpmain.html'
+						                     ];
+						
+					}else{
+						/*******Local Testing************************/
+							templateFiles = [					          
+						                'text!../templates/cpmain.html'
+						                 ];
+					}
+
+					App.utils.load(sandbox, requiredFiles,templateFiles, function() {
+						this.initData();
+						if (cpEnv_Web.debug) {
+							window.sandbox = sandbox;							
+						}else{
+							    if(!window.console) window.console = {};
+							    var methods = ["log", "debug", "warn", "info"];
+							    for(var i=0;i<methods.length;i++){
+							    	console[methods[i]] = function(){};
+							    }
+								//window.sandbox = sandbox;
+						}	
+						sandbox.baseView = new sandbox.views.cpBaseView({
+							el:"#cp-container"
+						});
+
+						/* for debug */
+											
+					}, this);
+				}
+			});
+			return Router;
+		});

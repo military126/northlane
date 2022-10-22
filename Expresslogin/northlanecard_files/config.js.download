@@ -1,0 +1,6 @@
+this.cp_Web = {
+			module : 'cp',
+			debug : false,
+			datasource : 'JSON',//set as'JSON' for server response
+			contextRoot:'./client',
+		};
