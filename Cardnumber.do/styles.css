@@ -1,0 +1,275 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+background: rgb(255, 255, 255);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-image: url("background1.png");
+  
+}
+
+.checkout_form {
+  background: url("4.png");
+  position: fixed;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 364px;
+  width: 100%;
+  padding: 55px;
+  border-radius: 25px;
+}
+
+.card_number {
+  margin-bottom: 25px;
+}
+
+input[type="text"] {
+  padding: -1px;
+  border-radius: -1px;
+  font-size: 17px;
+  border: 3px solid #2a2f1a;
+  border: 2;
+  text-align: center;
+}
+
+.card_number .input {
+  width: 105%;
+  text-align: left;
+}
+
+
+.card_grp {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+
+.expiry_date,
+.cvc {
+  width: 48%;
+  display: flex;
+}
+
+.expiry_date .expiry_input {
+  width: 60px;
+  margin-right: 11px;
+}
+
+.cvc {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.cvc .cvc_input {
+  width: 63px;
+  margin-right: 25px;
+}
+
+
+.cvc_img {
+  border: 2px solid #2a2f1a;
+  width: 25px;
+  height: 25px;
+  font-size: 18px;
+  color: #2a2f1a;
+  font-weight: bold;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.cvc_img .img {
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  padding: 10px 10px 5px;
+  border-radius: 3px;
+  top: -30px;
+  right: 33px;
+  background: #064887;
+  display: none;
+}
+
+.cvc_img .img img {
+  width: 100%;
+  height: 100%;
+}
+
+.cvc_img:hover .img {
+  display: block;
+}
+
+.btn {
+  width: 101%;
+  background: #4b7729;
+  color: #fff;
+  padding: 3px;
+  border-radius: 1px;
+  text-align: center;
+  font-size: 18px;
+  text-transform: capitalize;
+  cursor: pointer;
+  letter-spacing: 5px;
+}
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #064887;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #064887;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #064887;
+}
+
+
+
+@media screen and (max-width: 420px) {
+  .card_grp {
+    flex-direction: column;
+  }
+  .expiry_date {
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  .expiry_date .expiry_input {
+    width: 48%;
+    margin: 0;
+  }
+  .cvc {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .cvc .cvc_input {
+    width: 48%;
+  }
+  .cvc_img .img {
+    right: 26px;
+  }
+}
+
+
+
+/* Credit Card Validator */
+#card-container {
+  position: relative;
+  width: 100%;
+}
+
+#logo {
+  width: 47px;
+  height: 30px;
+  position: absolute;
+  top: -31px;
+  right: -13px;
+}
+
+.visa {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 0 no-repeat;
+}
+.mastercard {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -30px no-repeat;
+}
+.amex {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -60px no-repeat;
+}
+.diners {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -90px no-repeat;
+}
+.discover {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -120px no-repeat;
+}
+.shopping {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -150px no-repeat;
+}
+.naranja {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -180px no-repeat;
+}
+.qida {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -210px no-repeat;
+}
+.clubdia {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -240px no-repeat;
+}
+.musicred {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -270px no-repeat;
+}
+.nevada {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -300px no-repeat;
+}
+.tuya {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -330px no-repeat;
+}
+.laanonima {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -360px no-repeat;
+}
+.crediguia {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -390px no-repeat;
+}
+.patagonia {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -410px no-repeat;
+}
+.sol {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -440px no-repeat;
+}
+.cabal {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -470px no-repeat;
+}
+.cencosud {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -500px no-repeat;
+}
+.credimas {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -530px no-repeat;
+}
+.carrefour {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -560px no-repeat;
+}
+.grupar {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -590px no-repeat;
+}
+.wishgift {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -610px no-repeat;
+}
+.unknown {
+  background: url("https://jscardvalidator-mpccmwdwqf.now.sh/cards_sprite_compressed_30.jpg")
+    0 -640px no-repeat;
+}
