@@ -1,0 +1,10 @@
+/*nifty corners layout*/
+
+window.onload=function(){
+Nifty("div#mainpage-area,div#out-page","small bottom");
+Nifty("div#communication,div#content","none same-height");
+Nifty("div#hello h1","tl tr")
+Nifty("div#hello,#am-info,p.note,#vcard-showcard,div#dd-forpayroll,h2.subhead-section,p.vcard-data,div.guid-notice");
+Nifty("div#top-balance,div.intro h1,div.intro-alert h1", "top"); Nifty("div.intro h2,div.intro-alert h2", "bottom");
+Nifty("th", "top");
+}
