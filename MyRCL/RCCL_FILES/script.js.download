@@ -1,0 +1,41 @@
+$(function() {
+	if ($('.alert').length > 0){
+		$.scrollTo('.alert', 1000);
+	}
+	setFundListHeights();
+	setTimeout(function() {
+    	setFundListHeights();
+    }, 1000);
+	$(window).resize(setFundListHeights);
+	$(".btn-delete").click(function(){
+		if (!confirm("Are you sure you would like to delete this application? This cannot be undone.")){
+			return false;
+		}
+	});
+});
+
+function isBreakpoint( alias ) {
+    return $('.device-' + alias).is(':visible');
+}
+
+function setFundListHeights(){
+	setEqualHeights('.fund-listing .lockup');
+	setEqualHeights('.fund-listing .overview');
+}
+
+function setEqualHeights(selector){
+	$(selector).height('auto');
+	if(!isBreakpoint('xs')){
+		var highestBox = 0;
+		$(selector).each(function(){
+			if($(this).height() > highestBox) {
+				highestBox = $(this).height(); 
+			}
+		});  
+		$(selector).height(highestBox);
+	}
+}
+
+function htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
